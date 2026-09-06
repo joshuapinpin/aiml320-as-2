@@ -5,12 +5,7 @@ from sklearn.metrics import silhouette_score
 
 
 class KMeansEvaluator:
-    """Class to evaluate K-means clustering using WCSS and silhouette scores.
-
-    Evaluates K-means for different values of K. The code will compute the WCSS (inertia) and
-    silhouette scores for K in the range 2 to 10, and plot the results.
-    It will also print the best K based on the silhouette score.
-    """
+    """Class to evaluate K-means clustering using WCSS and silhouette scores."""
     def __init__(self, X, k_min=2, k_max=10, random_state=42):
         self.X = X
         self.k_range = range(k_min, k_max + 1)
@@ -57,16 +52,10 @@ class KMeansEvaluator:
         plt.tight_layout()
         plt.show()
 
-    def main(self):
+    def evaluate(self):
         print("Evaluating K-means clustering...")
         self.evaluate_wcss()
         self.evaluate_silhouette()
         print("Plotting WCSS and Silhouette scores...")
         self.plot()
         print(f"Best K by silhouette score: {self.best_k()} (score={max(self.silhouette_scores):.4f})")
-
-if __name__ == "__main__":
-    print("Loading data from part1_data.npz...")
-    X = np.load("part1_data.npz")["X"]
-    evaluator = KMeansEvaluator(X)
-    evaluator.main()
